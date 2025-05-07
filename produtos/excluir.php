@@ -29,8 +29,6 @@ if(isset($_GET['confirmar-exclusao'])){
             <a href="visualizar.php" class="btn btn-secondary">Não</a>
             <a href="?id=<?=$id?>&confirmar-exclusao" class="btn btn-danger">Sim</a>
 
-           
-
         </div>
 
         <hr>

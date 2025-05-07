@@ -1,31 +1,30 @@
 <?php
-//parametros de conexao
+/* Parâmetros de conexão em ambiente de desenvolvimento,
+no nosso caso, o XAMPP */
 $servidor = "localhost";
 $usuario = "root";
 $senha = "";
 $banco = "vendas";
 
-/* configuraçoes para conexao de banco de dados*/
-//bloco tray/catch
-//passamos no tryu tudoque queremosque seja feito(as ações de confi/conexao bd)
+/* Configurações para conexão ao banco de dados */
+
+/* Bloco try/catch
+Passamos no try tudo que queremos que seja feito (as ações de config/conexão com o BD) */
 try {
+    // Criando conexão com o banco usando a classe PDO
+    // PDO (PHP Data Object): classe para manipulação de banco de dados
     $conexao = new PDO(
         "mysql:host=$servidor;dbname=$banco;charset=utf8",
-        $usuario,
-        $senha
+        $usuario, $senha
+    );
 
-    );
-    $conexao->setAttribute(
-        PDO::ATTR_ERRMODE,
-        PDO::ERRMODE_EXCEPTION
-    );
+    /* Configurar PDO para lançar exceções/erros caso ocorram */
+    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $erro) {
-    die("deu ruim: " . $erro->getMessage());
+    /* E colocamos no catch o que fazer CASO alguma ação no try FALHE.
+    Neste caso, é gerada uma exceção/erro e exibimos a mensagem sobre ela */
+    die( "Deu ruim: ".$erro->getMessage() );
 }
 
-//criando conexão com o bando ucando a classe pdo
-//pdo (php data object): classe para manipulação de banco de dador
 
 
-
-/* configurar pdo para lançar execeçoes/erros caso ocorram */

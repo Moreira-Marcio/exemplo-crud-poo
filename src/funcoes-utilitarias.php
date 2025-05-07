@@ -1,8 +1,5 @@
 <?php
-
-function formatarPreco(float $preco): string {
-    
-        return  'R$ ' . number_format($preco, 2, ',', '.');
-    }
-
-    
+function formatarPreco( float $valor ):string {
+    $precoFormatado = "R$ " .number_format($valor, 2, ",", ".");
+    return $precoFormatado;
+}

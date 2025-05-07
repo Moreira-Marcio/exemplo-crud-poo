@@ -1,12 +1,13 @@
 <?php
+/* Acessando as funções de Fabricantes */
 require_once "../src/funcoes-fabricantes.php";
 
-$listaDeFabricantes=listarFabricantes($conexao);
+/* Chamando a função responsável por carregar os dados dos Fabricantes */
+$listaDeFabricantes = listarFabricantes($conexao);
 
-//contando os elementos 
-$quantidade = count ($listaDeFabricantes);
+/* Contando os elementos/registros */
+$quantidade = count($listaDeFabricantes);
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -28,7 +29,7 @@ $quantidade = count ($listaDeFabricantes);
 
 
         <table class="table table-hover table-bordered w-50">
-            <caption>Lista de Fabricantes: <?=$quantidade?></caption>
+            <caption>Lista de Fabricantes: <?=$quantidade?> </caption>
             <thead class="table-light">
                 <tr>
                     <th>ID</th>
@@ -37,19 +38,23 @@ $quantidade = count ($listaDeFabricantes);
                 </tr>
             </thead>
             <tbody>
-        <?php foreach($listaDeFabricantes as $fabricante) {?>            
-            
+
+<?php 
+foreach($listaDeFabricantes as $fabricante) { ?>
                 <tr>
-                    <td> <?=$fabricante["id"]?></td>
-                    <td> <?= $fabricante["nome"]?> </td>
-                    <!-- cinfigurar o link dinamico passamos um parametro de URL para a pagina atualizar.php,neste caso, o parametro chamado id contendo o valor do id do fabricante a ser editado -->
+                    <td> <?= $fabricante["id"] ?> </td>
+                    <td> <?= $fabricante["nome"] ?> </td>
                     <td>
+                        <!-- Configurando o link DINÂMICO
+                        Passamos um parâmetro de URL para a página atualizar.php,
+                        neste caso, o parâmetro chamado "id" contendo o
+                        valor do id do fabricante a ser editado. -->
                         <a class="btn btn-warning btn-sm" href="atualizar.php?id=<?=$fabricante['id']?>">Editar</a>
-                        
-                        <a class="btn btn-danger btn-sm" href="excluir.php?id=<?=$fabricante['id']?>">excluir</a>
+                        <a class="btn btn-danger btn-sm" href="excluir.php?id=<?=$fabricante['id']?>">Excluir</a>
                     </td>
-                </tr>
-                <?php } ?> 
+                </tr>                
+<?php } ?>
+                
             </tbody>
         </table>
     </div>
