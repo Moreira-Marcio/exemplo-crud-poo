@@ -4,8 +4,10 @@ namespace ExemploCrud\Services;
 
 use ExemploCrud\Database\ConexaoBD;
 use Exception;
+use ExemploCrud\Models\Fabricante;
 use PDO;
 use Throwable;
+
 
 final  class FabricanteServico
 {
@@ -29,4 +31,24 @@ final  class FabricanteServico
             throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
         }
     }
+
+    public function inserir(Fabricante $fabricante):void
+    {       
+            
+            $sql = "INSERT INTO fabricantes(nome) VALUES(:nome)";
+        
+            try {
+                $consulta =$this->conexao->prepare($sql);
+                $consulta->bindValue(":nome",$fabricante->getNome(), PDO::PARAM_STR);        
+                $consulta->execute();
+            } catch (Exception $erro) {
+                die("Erro ao inserir: ".$erro->getMessage());
+            }
+        
+        
+    }
 }
+
+
+
+
