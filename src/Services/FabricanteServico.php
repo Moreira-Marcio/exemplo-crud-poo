@@ -7,7 +7,7 @@ use Exception;
 use ExemploCrud\Models\Fabricante;
 use PDO;
 use Throwable;
-
+-
 
 final  class FabricanteServico
 {
@@ -15,6 +15,7 @@ final  class FabricanteServico
 
     public function __construct()
     {
+        
         $this->conexao = ConexaoBD::getConexao();
     }
 
