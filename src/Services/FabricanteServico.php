@@ -81,4 +81,19 @@ final  class FabricanteServico
             throw new Exception("Erro ao atualizar fabricante: " . $erro->getMessage());
         }
     }
+
+    public function excluir(int $id): void
+    {
+        $sql = "DELETE FROM fabricantes WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $id, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Throwable $erro) {
+            throw new Exception("Erro ao excluir fabricante: " . $erro->getMessage());
+        }
+    }
+
+
 }
