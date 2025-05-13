@@ -55,6 +55,10 @@ final  class FabricanteServico
             $consulta = $this->conexao->prepare($sql);
             $consulta->bindValue(":id", $id, PDO::PARAM_INT);
             $consulta->execute();
+            // guardamos oresultado da operação fetch em uma variavel
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+            //se o resultado for verdadeiro,retornamos ele.senão retornamos null
+            return $resultado ? $resultado: null; // Retorna null se não encontrar
 
             /* Usamos o fetch para garantir o retorno
         de um único array associativo com o resultado */
