@@ -1,7 +1,19 @@
-<?php // produtos/visualizar.php
-require_once "../src/funcoes-produtos.php";
-require_once "../src/funcoes-utilitarias.php";
-$listaDeProdutos = listarProdutos($conexao);
+<?php 
+
+use ExemploCrud\Services\ProdutoServico;
+use ExemploCrud\Helpers\Utils;
+
+
+require_once "../vendor/autoload.php";
+
+
+
+
+$produtoServico = new ProdutoServico();
+$listaDeProdutos= $produtoServico->listarTodos();
+$quantidade = count($listaDeProdutos);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -24,22 +36,22 @@ $listaDeProdutos = listarProdutos($conexao);
 
         <div class="row g-1">
 
-<?php foreach( $listaDeProdutos as $produto ): ?>
-            <div class="col-sm-6">
-                <article class="bg-body-secondary p-2">
-                    <h3> <?=$produto["produto"]?> </h3>
-                    <h4>Fabricante: <?=$produto["fabricante"]?></h4>
-                    <p><b>Preço: </b> <?=formatarPreco($produto["preco"])?> </p>
-                    <p><b>Quantidade: </b> <?=$produto["quantidade"]?></p>
-                    <p><b>Total:</b> <?=formatarPreco($produto["total"])?> </p>
-                    <p>
-                        <a class="btn btn-warning" href="atualizar.php?id=<?=$produto["id"]?>">Editar</a>
-                        <a class="btn btn-danger" href="excluir.php?id=<?=$produto["id"]?>">Excluir</a>
-                    </p>
-                </article>
-            </div>    
-<?php endforeach; ?>            
-            
+            <?php foreach ($listaDeProdutos as $produto): ?>
+                <div class="col-sm-6">
+                    <article class="bg-body-secondary p-2">
+                        <h3> <?= $produto["produto"] ?> </h3>
+                        <h4>Fabricante: <?= $produto["fabricante"] ?></h4>
+                        <p><b>Preço: </b> <?= Utils::formatarPreco($produto["preco"]) ?> </p>
+                        <p><b>Quantidade: </b> <?= $produto["quantidade"] ?></p>
+                        <p><b>Total:</b> <?=Utils:: formatarPreco($produto["total"]) ?> </p>
+                        <p>
+                            <a class="btn btn-warning" href="atualizar.php?id=<?= $produto["id"] ?>">Editar</a>
+                            <a class="btn btn-danger" href="excluir.php?id=<?= $produto["id"] ?>">Excluir</a>
+                        </p>
+                    </article>
+                </div>
+            <?php endforeach; ?>
+
         </div>
 
 

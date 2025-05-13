@@ -1,7 +1,16 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
-require_once "../src/funcoes-produtos.php";
-$listaDeFabricantes = listarFabricantes($conexao);
+
+use ExemploCrud\Services\FabricanteServico;
+
+use ExemploCrud\Services\ProdutoServico;
+
+require_once "../vendor/autoload.php";
+
+
+$produtoServico = new ProdutoServico();
+
+$fabricanteServico= new FabricanteServico();
+
 
 if(isset($_POST["inserir"])){
     // Capturar/sanitizar os dados
@@ -16,6 +25,11 @@ if(isset($_POST["inserir"])){
 
     // Chamar a função responsável por inserir o produto e passar os parâmetros
     inserirProduto($conexao, $nome, $preco, $quantidade, $fabricanteId, $descricao);
+
+     $produtoServico = new ProdutoServico();
+    $listaDeFabricantes = $fabricanteServico->listarTodos();
+    $produto = new ProdutoServico($nome, $preco, $quantidade, $fabricanteId, $descricao);
+    $produtoServico->inserir($produtos);
     
     // Por fim, redirecionar para visualização dos produtos
     header("location:visualizar.php");
