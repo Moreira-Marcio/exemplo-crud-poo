@@ -7,7 +7,7 @@ use Exception;
 use ExemploCrud\Models\Fabricante;
 use PDO;
 use Throwable;
--
+
 
 final  class FabricanteServico
 {
@@ -15,7 +15,7 @@ final  class FabricanteServico
 
     public function __construct()
     {
-        
+
         $this->conexao = ConexaoBD::getConexao();
     }
 
@@ -33,23 +33,34 @@ final  class FabricanteServico
         }
     }
 
-    public function inserir(Fabricante $fabricante):void
-    {       
-            
-            $sql = "INSERT INTO fabricantes(nome) VALUES(:nome)";
-        
-            try {
-                $consulta =$this->conexao->prepare($sql);
-                $consulta->bindValue(":nome",$fabricante->getNome(), PDO::PARAM_STR);        
-                $consulta->execute();
-            } catch (Exception $erro) {
-                die("Erro ao inserir: ".$erro->getMessage());
-            }
-        
-        
+    public function inserir(Fabricante $fabricante): void
+    {
+
+        $sql = "INSERT INTO fabricantes(nome) VALUES(:nome)";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":nome", $fabricante->getNome(), PDO::PARAM_STR);
+            $consulta->execute();
+        } catch (Exception $erro) {
+            die("Erro ao inserir: " . $erro->getMessage());
+        }
+    }
+
+    public function buscarPorId(int $id): ?array // ?array indica que pode retornar null
+    {
+        $sql = "SELECT * FROM fabricantes WHERE id = :id";
+
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $id, PDO::PARAM_INT);
+            $consulta->execute();
+
+            /* Usamos o fetch para garantir o retorno
+        de um único array associativo com o resultado */
+            return $consulta->fetch(PDO::FETCH_ASSOC);
+        } catch (Throwable $erro) {
+            throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
+        }
     }
 }
-
-
-
-
