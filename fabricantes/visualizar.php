@@ -38,7 +38,7 @@ $quantidade = count($listaDeFabricantes);
 
         <hr>
         <h2>Lendo e carregando todos os fabricantes.</h2>
-        <?php if (isset($mensagemDeErro)): ?>
+        <?php if (!empty($mensagemDeErro)): ?>
             <p class="alert alert-danger"><?=$mensagemDeErro?></p>
         <?php endif; ?>    
 

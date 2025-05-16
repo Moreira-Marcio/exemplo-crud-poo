@@ -6,7 +6,7 @@ require_once "../src/funcoes-fabricantes.php";
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
 $produto = listarUmProduto($conexao, $id);
-$listaDeFabricantes = listarFabricantes($conexao);
+
 if(isset($_POST['atualizar'])){
     $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $preco = filter_input(INPUT_POST, "preco", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
@@ -14,7 +14,7 @@ if(isset($_POST['atualizar'])){
     $fabricanteId = filter_input(INPUT_POST, "fabricante", FILTER_SANITIZE_NUMBER_INT);
     $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    $produtoAtualizado->($conexao, $id, $nome, $preco, $quantidade, $fabricanteId, $descricao);
+    $produtoAtualizado->produto($conexao, $id, $nome, $preco, $quantidade, $fabricanteId, $descricao);
     $produto -> $predutoServico->atualizar($id);
     header("location:visualizar.php");
 }

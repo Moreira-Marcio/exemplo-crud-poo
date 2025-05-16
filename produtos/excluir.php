@@ -6,7 +6,7 @@ require_once "../vendor/autoload.php";
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 
 $produtoServico = new ProdutoServico();
-$produto= $ProdutoServico->buscarPorId($id);
+//$produto= $ProdutoServico->buscarPorId($id);
  
 
  

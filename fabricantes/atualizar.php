@@ -19,12 +19,9 @@ $fabricanteDados = $fabricanteServico->buscarPorId($id);
 
 /* Verificando se o formulário de atualização foi acionado */
 if(isset($_POST['atualizar'])){
-    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
-
-   
+    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);   
 
     $Fabricante = new Fabricante($nome,$id);
-   
    
     
     $fabricanteServico->atualizar($Fabricante);
