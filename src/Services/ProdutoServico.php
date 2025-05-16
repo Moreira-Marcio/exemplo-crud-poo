@@ -13,12 +13,11 @@ use ExemploCrud\Models\Produto;
 final class ProdutoServico
 {
     private PDO $conexao;
- 
+
 
     public function __construct()
     {
         $this->conexao = ConexaoBD::getConexao();
-      
     }
 
     public function listarTodos(): array
@@ -60,7 +59,38 @@ final class ProdutoServico
         }
     }
 
+      public function buscarPorID(int $id): ?array
+    {
+        $sql = "SELECT * FROM produtos WHERE id= :id";
+ 
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $id, PDO::PARAM_INT);
+            $consulta->execute();
+ 
+            // Guardamos o resultado da operação fetch em uma variavel
+            // $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+ 
+            //Se o resultado for verdadeiro, retornamos ele.Senão,retornamos null..
+            // return $resultado ? $resultado : null;
+ 
+            //Versão usando ternário simplificado usando 'elvis operator'
+            return $consulta->fetch(PDO::FETCH_ASSOC) ?: null;
+        } catch (Throwable $erro) {
+            throw ("Erro ao carregar produto0: " . $erro->getMessage());
+        }
+    }
 
-
-
+   public function excluir(int $id): void
+    {
+        $sql = "DELETE FROM produtos WHERE id = :id";
+ 
+        try {
+            $consulta = $this->conexao->prepare($sql);
+            $consulta->bindValue(":id", $id, PDO::PARAM_INT);
+            $consulta->execute();
+        } catch (Throwable $erro) {
+            throw new Exception("Erro ao excluir produto: " . $erro->getMessage());
+        }
+    }
 }
